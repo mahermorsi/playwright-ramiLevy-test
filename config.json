@@ -5,6 +5,7 @@
     "password":"12345678",
     "url":"https://www.rami-levy.co.il/",
     "addressUrl":"https://www-api.rami-levy.co.il/api/v2/site/clubs/addresses",
-    "deleteUrl":"https://www-api.rami-levy.co.il/api/v2/site/cart/delete"
+    "deleteUrl":"https://www-api.rami-levy.co.il/api/v2/site/cart/delete",
+    "ApiPutInfoUrl":"https://www-api.rami-levy.co.il/api/v2/site/clubs/customer/921083"
     }
 }
