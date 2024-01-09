@@ -2,23 +2,22 @@ import { test, Page, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
 import { LoginPage } from '../logic/login-page';
 import {configJson} from '../config.json';
-import { DateTimeFormat } from '../utils/date-time-format'; 
 import { AddressPage } from '../logic/address-page';
 import { MainPage } from '../logic/main-page';
 
-test.describe('test for adding a address',()=>{
+test.describe('test for adding an address',()=>{
   let browserWrapper:BrowserWrapper;
   let page:Page;
   let loginPage:LoginPage
   let addressPage:AddressPage
-  let mainPage:MainPage
+
 
   test.beforeEach(async()=>{
     browserWrapper=new BrowserWrapper();
     page = await browserWrapper.getPage(configJson.url)
     loginPage = new LoginPage(page);
     await loginPage.fullLoginProcess(configJson.user,configJson.password);
-    mainPage = new MainPage(page)
+    const mainPage = new MainPage(page)
     await mainPage.clickOnUserProfileButton();
     await mainPage.clickOnAddressManagementButton();
     addressPage = new AddressPage(page)
