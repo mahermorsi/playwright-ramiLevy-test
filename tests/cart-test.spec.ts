@@ -23,7 +23,7 @@ test.describe('test for adding items in cart',()=>{
             "supplyAt": DateTimeFormat.getCurrentDateTime(),
             "items": {
                 "336789": "1.00",
-                "292804": "1.00",
+                "329483": "1.00",
             },
             "meta": null
         },
@@ -46,6 +46,7 @@ test.describe('test for adding items in cart',()=>{
     const responseBody = await newPost.json()
     const ApiPrice=await responseBody.items.reduce((sum: string, item: { finalPriceClub: string; }) => sum + (item.finalPriceClub || 0), 0);
     const mainPage = new MainPage(page);
+    await page.waitForTimeout(4000)
     expect(ApiPrice).toBe(await mainPage.getTotalPrice())
   })
 
@@ -53,6 +54,7 @@ test.describe('test for adding items in cart',()=>{
     const responseBody = await newPost.json()
     const itemsCount = responseBody.items.length
     const mainPage = new MainPage(page)
+    await page.waitForTimeout(4000)
     expect(itemsCount).toBe(await mainPage.getCartProductCount())
   })
 })
