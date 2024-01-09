@@ -27,6 +27,7 @@ export class LoginPage extends BasePage{
        await this.loginButton.click();
     }
     async fullLoginProcess(user:string, password: string){ 
+        await this.pressLoginMainButton();
         await this.fillUsername(user);
         await this.fillPassword(password);
         await this.pressLoginButton();

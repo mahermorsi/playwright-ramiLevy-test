@@ -2,8 +2,9 @@ import { test, Page, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
 import { LoginPage } from '../logic/login-page';
 import {configJson} from '../config.json';
+import { DateTimeFormat } from '../utils/date-time-format'; 
 
-test.describe('Test remove a user',()=>{
+test.describe('test for adding items in cart',()=>{
   let browserWrapper:BrowserWrapper;
   let page:Page;
 
@@ -16,19 +17,24 @@ test.describe('Test remove a user',()=>{
   test.afterEach(async()=>{
     await browserWrapper.closeBrowser();
   })
-  test("check item is successfully added to cart ",async({request})=>{
+  test("check item is successfully added to cart",async({request})=>{
     const newPost = await request
     .post(configJson.url+'api/v2/cart', {
         data: {
             "store": "279",
             "isClub": 0,
-            "supplyAt": "2024-01-09T09:33:31.829Z",
+            "supplyAt": DateTimeFormat.getCurrentDateTime(),
             "items": {
-                "305699": "1.00"
+                "336789": "1.00",
+                "292804": "1.00",
             },
             "meta": null
+        },
+        headers:{
+            "Ecomtoken": configJson.token,
         }
     })
+    
     const body = await newPost.json()
     console.log(body)
   })
