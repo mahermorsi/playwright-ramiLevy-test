@@ -1,24 +1,21 @@
-import { test, Page, expect } from '@playwright/test';
+import { test, Page, expect, APIResponse } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
 import { LoginPage } from '../logic/login-page';
+import { MainPage } from '../logic/main-page';
 import {configJson} from '../config.json';
 import { DateTimeFormat } from '../utils/date-time-format'; 
 
 test.describe('test for adding items in cart',()=>{
   let browserWrapper:BrowserWrapper;
   let page:Page;
+  let newPost: APIResponse;
 
-  test.beforeEach(async()=>{
+  test.beforeEach(async({request})=>{
     browserWrapper=new BrowserWrapper();
     page = await browserWrapper.getPage(configJson.url)
     const loginPage = new LoginPage(page);
     await loginPage.fullLoginProcess(configJson.user,configJson.password);
-  });
-  test.afterEach(async()=>{
-    await browserWrapper.closeBrowser();
-  })
-  test("check item is successfully added to cart",async({request})=>{
-    const newPost = await request
+    newPost = await request
     .post(configJson.url+'api/v2/cart', {
         data: {
             "store": "279",
@@ -34,8 +31,28 @@ test.describe('test for adding items in cart',()=>{
             "Ecomtoken": configJson.token,
         }
     })
-    
-    const body = await newPost.json()
-    console.log(body)
+  });
+
+  test.afterEach(async({request})=>{
+    const patch = await request
+    .patch(configJson.deleteUrl,{
+        headers:{
+            "Ecomtoken": configJson.token,
+        }
+    })
+    await browserWrapper.closeBrowser();
+  })
+  test("check API added items' total price, is equal to the total price shown on the cart page",async()=>{
+    const responseBody = await newPost.json()
+    const ApiPrice=await responseBody.items.reduce((sum: string, item: { finalPriceClub: string; }) => sum + (item.finalPriceClub || 0), 0);
+    const mainPage = new MainPage(page);
+    expect(ApiPrice).toBe(await mainPage.getTotalPrice())
+  })
+
+  test("check API added item's count is equal to the list count of products on cart page", async()=>{
+    const responseBody = await newPost.json()
+    const itemsCount = responseBody.items.length
+    const mainPage = new MainPage(page)
+    expect(itemsCount).toBe(await mainPage.getCartProductCount())
   })
 })
