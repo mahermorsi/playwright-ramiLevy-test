@@ -3,6 +3,8 @@
     "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy1hcGkucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6Ly93d3ctYXBpLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTcwNDc5MjAyMS42MTY0OTcsIm5iZiI6MTcwNDc5MjA4MS42MTY0OTcsImV4cCI6MTcwOTk3NjAyMS42MTY0OTcsImlkIjo5MjEwODMsImVtYWlsIjoibWFoZXJtb3JzaUBnbWFpbC5jb20iLCJjaWQiOiI5OTAwMTU3OTMwOSJ9._Qs7IaY4pjgQX4m6NDqUt4Au9VBTooN9Hsq3kRCSkK0",
     "user":"mahermorsi@gmail.com",
     "password":"12345678",
-    "url":"https://www.rami-levy.co.il/"
+    "url":"https://www.rami-levy.co.il/",
+    "addressUrl":"https://www-api.rami-levy.co.il/api/v2/site/clubs/addresses",
+    "deleteUrl":"https://www-api.rami-levy.co.il/api/v2/site/cart/delete"
     }
 }
