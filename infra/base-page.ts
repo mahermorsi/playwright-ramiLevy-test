@@ -1,0 +1,11 @@
+import { expect, type Locator, type Page } from '@playwright/test';
+export class BasePage{
+    protected readonly page: Page;
+
+    constructor(page: Page){
+        this.page = page;
+    }
+    async initPage(){
+        await this.page.waitForLoadState()
+    }
+}
