@@ -9,12 +9,20 @@ const putRequest = async (url:string,body:any,token:string) => {
    })      
 }
 
-const postRequest = async (url:string,data:any,token:string) => {
+const postRequest = async (url:string,body:any,token:string) => {
     const myRequest = await request.newContext()
     return await myRequest.post(url,{
-    data:{data},
+    data:body,
     headers:{"Ecomtoken":token,}
    })      
 }
 
-export{putRequest,postRequest}
+
+const patchRequest = async (url:string,token:string) => {
+    const myRequest = await request.newContext()
+    return await myRequest.patch(url,{
+    headers:{"Ecomtoken":token,}
+   })      
+}
+
+export{putRequest,postRequest,patchRequest}
