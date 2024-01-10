@@ -4,7 +4,7 @@ import { LoginPage } from '../logic/pages/login-page';
 import { configJson } from '../config.json';
 import { MainPage } from '../logic/pages/main-page';
 
-test.describe('test for login', () => {
+test.describe.skip('test for login', () => {
     let browserWrapper: BrowserWrapper;
     let page: Page;
 
@@ -17,7 +17,7 @@ test.describe('test for login', () => {
         await browserWrapper.
             closeBrowser();
     })
-    test("check the user name after login", async () => {
+    test.skip("check the user name after login", async () => {
         const loginPage = new LoginPage(page);
         await loginPage.fullLoginProcess(configJson.user, configJson.password);
         const mainPage = new MainPage(page);

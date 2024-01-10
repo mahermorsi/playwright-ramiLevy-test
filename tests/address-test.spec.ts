@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test,Page ,expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
 import {configJson} from '../config.json';
 import { AddressPage } from '../logic/pages/address-page';
@@ -9,18 +9,19 @@ import { setAddressBodyRequest } from '../logic/api/request-body/address-body-re
 
 test.describe('test for adding an address',()=>{
   let browserWrapper:BrowserWrapper;
+  let page: Page
 
-
-  test.beforeEach(async({page})=>{
-    await page.goto(configJson.url)
+  test.beforeEach(async()=>{
+    browserWrapper = new BrowserWrapper()
+    page = await browserWrapper.getPage(configJson.url)
     const mainPage = new MainPage(page)
     await mainPage.clickOnUserProfileButton();
     await mainPage.clickOnAddressManagementButton();
     
   });
-  test.afterEach(async({page})=>{
+  test.afterEach(async()=>{
     //await browserWrapper.closeBrowser();
-    await page.close();
+    //await page.close();
   })
   test("check address is successfully added",async({page})=>{
 
