@@ -8,7 +8,7 @@ export class MainPage extends BasePage {
     private readonly cartTotalPrice: Locator;
     private readonly userAcountButton:Locator;
     private readonly addressManagementButton:Locator;
-    private readonly userName:Locator;
+    readonly userName:Locator;
 
     constructor(page: Page) {
         super(page);
@@ -19,7 +19,7 @@ export class MainPage extends BasePage {
         this.userName=this.page.locator('//*[@id="login-user"]/div/div/div[2]/div/span')
         this.initPage();
     }
-
+    
     async clickOnUserProfileButton(){
         await this.userAcountButton.click()
     }

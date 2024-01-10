@@ -9,3 +9,4 @@ creataddressTest
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+\nplaywright/.auth
