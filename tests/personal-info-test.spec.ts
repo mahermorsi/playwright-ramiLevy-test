@@ -34,6 +34,6 @@ test.describe('test dashboard personal information',()=>{
     }
    })
    const infoPage = new InfoPage(page);
-   expect(infoPage.isFullNameMatches("legend","Maher")).toBeTruthy();
+   expect(await infoPage.isFullNameMatches("legend","Maher")).toBeTruthy();
   })
 })
