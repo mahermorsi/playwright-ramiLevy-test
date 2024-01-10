@@ -12,7 +12,7 @@ export class InfoPage extends BasePage{
     async isFullNameMatches(firstName:string,lastName:string){
         const firstNameResult =  await this.name.first().textContent()
         const lastNameResult =  await this.name.last().textContent()
-        if (firstNameResult && lastNameResult) return firstName.includes(firstName) && lastName.includes(lastNameResult)
+        if (firstNameResult && lastNameResult) return firstNameResult.includes(firstName) && lastNameResult.includes(lastName)
         return false
     }
 }
