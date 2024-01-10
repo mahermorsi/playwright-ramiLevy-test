@@ -4,18 +4,18 @@ import { LoginPage } from '../logic/pages/login-page';
 import {configJson} from '../config.json';
 import { AddressPage } from '../logic/pages/address-page';
 import { MainPage } from '../logic/pages/main-page';
+import { ApiCalls } from '../logic/api/api-calls';
+import { parseBodyToJSON } from '../utils/utils';
+import { setAddressBodyRequest } from '../logic/api/request-body/address-body-request';
 
 test.describe('test for adding an address',()=>{
   let browserWrapper:BrowserWrapper;
   let page:Page;
-  let loginPage:LoginPage
-  let addressPage:AddressPage
-
 
   test.beforeEach(async()=>{
     browserWrapper=new BrowserWrapper();
     page = await browserWrapper.getPage(configJson.url)
-    loginPage = new LoginPage(page);
+    const loginPage = new LoginPage(page);
     await loginPage.fullLoginProcess(configJson.user,configJson.password);
     const mainPage = new MainPage(page)
     await mainPage.clickOnUserProfileButton();
@@ -26,28 +26,14 @@ test.describe('test for adding an address',()=>{
     await browserWrapper.
     closeBrowser();
   })
-  test("check address is successfully added",async({request})=>{
-    const newPost = await request
-    .post(configJson.addressUrl, {
-        data: {
-            "name": null,
-            "city_id": 1337,
-            "city": "עכברה",
-            "street": "12",
-            "street_number": "12",
-            "zip": "",
-            "apartment": "12",
-            "entrance": null,
-            "floor": "12"
-        },
-        headers:{
-            "Ecomtoken": configJson.token,
-        }
-        
-    });
+  test("check address is successfully added",async()=>{
+
+    const apiCalls = new ApiCalls();
+    const dataObject = setAddressBodyRequest(1337,"עכברה","12","12","12","12")
+    const newPost = await apiCalls.addNewAddress(parseBodyToJSON(dataObject))
     const body = await newPost.json()
     const allAddressesCount = Object.keys(body.data.allAddresses).length;
-    addressPage = new AddressPage(page)
+    const addressPage = new AddressPage(page)
     await addressPage.refreshPage();
     expect(await addressPage.getAllAddressCount()).toBe(allAddressesCount);
 
