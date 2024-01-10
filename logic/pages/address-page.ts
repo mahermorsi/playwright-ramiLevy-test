@@ -1,5 +1,5 @@
 import {type Locator, type Page } from '@playwright/test';
-import { BasePage } from '../infra/base-page';
+import { BasePage } from '../../infra/base-page';
 export class AddressPage extends BasePage{
     // LOCATORS
     private readonly addressCount:Locator;
@@ -10,6 +10,7 @@ export class AddressPage extends BasePage{
     }
 
     async getAllAddressCount(){
+        
         return await this.addressCount.count();
     }
     

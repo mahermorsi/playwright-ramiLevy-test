@@ -1,8 +1,8 @@
 import { test, Page, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
-import { LoginPage } from '../logic/login-page';
+import { LoginPage } from '../logic/pages/login-page';
 import { configJson } from '../config.json';
-import { MainPage } from '../logic/main-page';
+import { MainPage } from '../logic/pages/main-page';
 
 test.describe('test for login', () => {
     let browserWrapper: BrowserWrapper;
