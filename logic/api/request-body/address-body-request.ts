@@ -24,7 +24,7 @@ const setAddressBodyRequest = (
         city: city,
         street: street,
         street_number: street_number,
-        zip: null,
+        zip: "",
         apartment: apartment,
         entrance: null,
         floor: floor
