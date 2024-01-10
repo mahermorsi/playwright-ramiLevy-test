@@ -1,5 +1,6 @@
 import {type Locator, type Page } from '@playwright/test';
 import { BasePage } from '../../infra/base-page';
+import { waitForElementToBeVisible } from '../../utils/wait-for-elements';
 export class AddressPage extends BasePage{
     // LOCATORS
     private readonly addressCount:Locator;
@@ -10,7 +11,7 @@ export class AddressPage extends BasePage{
     }
 
     async getAllAddressCount(){
-        
+        await waitForElementToBeVisible(this.addressCount.first(),1000,5)
         return await this.addressCount.count();
     }
     
