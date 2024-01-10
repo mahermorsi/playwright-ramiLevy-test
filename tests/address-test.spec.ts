@@ -20,7 +20,7 @@ test.describe('test for adding an address',()=>{
     const mainPage = new MainPage(page)
     await mainPage.clickOnUserProfileButton();
     await mainPage.clickOnAddressManagementButton();
-    addressPage = new AddressPage(page)
+    
   });
   test.afterEach(async()=>{
     await browserWrapper.
@@ -47,7 +47,9 @@ test.describe('test for adding an address',()=>{
     });
     const body = await newPost.json()
     const allAddressesCount = Object.keys(body.data.allAddresses).length;
+    addressPage = new AddressPage(page)
     await addressPage.refreshPage();
+    await page.waitForTimeout(3000)
     expect(await addressPage.getAllAddressCount()).toBe(allAddressesCount);
 
   })
