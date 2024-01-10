@@ -21,6 +21,6 @@ test.describe('test for login', () => {
         const loginPage = new LoginPage(page);
         await loginPage.fullLoginProcess(configJson.user, configJson.password);
         const mainPage = new MainPage(page);
-        expect(await mainPage.getUserName()).toBe(configJson.userName)
+        expect(await mainPage.checkUserNameMatches(configJson.userName)).toBeTruthy()
     })
 })

@@ -49,7 +49,6 @@ test.describe('test for adding an address',()=>{
     const allAddressesCount = Object.keys(body.data.allAddresses).length;
     addressPage = new AddressPage(page)
     await addressPage.refreshPage();
-    await page.waitForTimeout(3000)
     expect(await addressPage.getAllAddressCount()).toBe(allAddressesCount);
 
   })

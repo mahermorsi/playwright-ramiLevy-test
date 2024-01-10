@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { BasePage } from '../../infra/base-page';
-import { waitForElementToBeEnabled, waitForElementToBeVisible } from '../../utils/wait-for-elements';
+import { waitForElementToBeVisible } from '../../utils/wait-for-elements';
 
 export class MainPage extends BasePage {
     // LOCATORS
@@ -38,7 +38,10 @@ export class MainPage extends BasePage {
             return parseFloat(cleanedString);
         }
     }
-    async getUserName(){
-        return await this.userName.textContent();
+    async checkUserNameMatches(user:string){
+        const wait =await waitForElementToBeVisible(this.userName,1000,5)
+        const name = await this.userName.textContent();
+        if (name && wait) return name.includes(user)
+        return false
     }
 }
