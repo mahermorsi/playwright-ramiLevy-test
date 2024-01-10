@@ -20,7 +20,7 @@ test.describe('test for adding an address',()=>{
   });
   test.afterEach(async({page})=>{
     //await browserWrapper.closeBrowser();
-    page.close();
+    await page.close();
   })
   test("check address is successfully added",async({page})=>{
 

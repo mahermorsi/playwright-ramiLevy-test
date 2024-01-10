@@ -13,9 +13,8 @@ test.describe('test for adding items in cart', () => {
   let page: Page;
   let newPost: APIResponse;
 
-  test.beforeEach(async () => {
-    browserWrapper = new BrowserWrapper();
-    page = await browserWrapper.getPage(configJson.url)
+  test.beforeEach(async ({page}) => {
+    await page.goto(configJson.url)
     const loginPage = new LoginPage(page);
     await loginPage.fullLoginProcess(configJson.user, configJson.password);
 
@@ -25,11 +24,10 @@ test.describe('test for adding items in cart', () => {
 
   });
 
-  test.afterEach(async () => {
+  test.afterEach(async ({page}) => {
     const apiRequest = new ApiCalls();
     await apiRequest.emptyItemsFromCart();
-
-    await browserWrapper.closeBrowser();
+    await page.close();
   })
   
 
