@@ -1,6 +1,5 @@
-import { test, Page, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
-import { LoginPage } from '../logic/pages/login-page';
 import {configJson} from '../config.json';
 import { AddressPage } from '../logic/pages/address-page';
 import { MainPage } from '../logic/pages/main-page';
@@ -10,23 +9,20 @@ import { setAddressBodyRequest } from '../logic/api/request-body/address-body-re
 
 test.describe('test for adding an address',()=>{
   let browserWrapper:BrowserWrapper;
-  let page:Page;
 
-  test.beforeEach(async()=>{
-    browserWrapper=new BrowserWrapper();
-    page = await browserWrapper.getPage(configJson.url)
-    const loginPage = new LoginPage(page);
-    await loginPage.fullLoginProcess(configJson.user,configJson.password);
+
+  test.beforeEach(async({page})=>{
+    await page.goto(configJson.url)
     const mainPage = new MainPage(page)
     await mainPage.clickOnUserProfileButton();
     await mainPage.clickOnAddressManagementButton();
     
   });
-  test.afterEach(async()=>{
-    await browserWrapper.
-    closeBrowser();
+  test.afterEach(async({page})=>{
+    //await browserWrapper.closeBrowser();
+    page.close();
   })
-  test("check address is successfully added",async()=>{
+  test("check address is successfully added",async({page})=>{
 
     const apiCalls = new ApiCalls();
     const dataObject = setAddressBodyRequest(1337,"עכברה","12","12","12","12")

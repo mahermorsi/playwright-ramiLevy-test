@@ -1,4 +1,4 @@
-import { test, expect, Browser, Page } from '@playwright/test';
+import {Browser, Page } from '@playwright/test';
 import { chromium } from 'playwright';
 export class BrowserWrapper{
     browser: Browser | undefined;
@@ -8,9 +8,11 @@ export class BrowserWrapper{
     }
 
     async getPage(url: string){
-        this.browser = await chromium.launch();
-        const context = await this.browser.newContext();
-        this.page = await context.newPage();
+        if (!this.page){
+            this.browser = await chromium.launch();
+            const context = await this.browser.newContext();
+            this.page = await context.newPage();
+        }
         if (url){
             await this.page.goto(url);
         }
@@ -23,5 +25,8 @@ export class BrowserWrapper{
         if (this.browser){
             await this.browser.close();
         }
+    }
+    async navigateTo(url:string){
+        if (this.page) await this.page.goto(url)
     }
 }
