@@ -5,7 +5,7 @@ import { MainPage } from '../logic/pages/main-page';
 import { configJson } from '../config.json';
 import { ApiCalls } from '../logic/api/api-calls';
 import { setCartBodyRequest } from '../logic/api/request-body/cart-body-request';
-import { parseCartBodyToJSON, parseUserBodyToJSON } from '../utils/utils';
+import { parseBodyToJSON } from '../utils/utils';
 
 
 test.describe('test for adding items in cart', () => {
@@ -21,7 +21,7 @@ test.describe('test for adding items in cart', () => {
 
     const apiRequest = new ApiCalls();
     const data = setCartBodyRequest("279", 0, {"336789": "1.00","329483": "1.00",})
-    newPost = await apiRequest.addItemsToCart(parseCartBodyToJSON(data))
+    newPost = await apiRequest.addItemsToCart(parseBodyToJSON(data))
 
   });
 

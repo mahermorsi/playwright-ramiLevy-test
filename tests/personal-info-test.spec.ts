@@ -5,7 +5,7 @@ import {configJson} from '../config.json';
 import { InfoPage} from '../logic/pages/personal-info-page';
 import { ApiCalls } from '../logic/api/api-calls';
 import {setUserBodyRequest } from '../logic/api/request-body/user-body-request';
-import { parseUserBodyToJSON } from '../utils/utils';
+import { parseBodyToJSON } from '../utils/utils';
 
 test.describe('test dashboard personal information',()=>{
   let browserWrapper:BrowserWrapper;
@@ -23,8 +23,8 @@ test.describe('test dashboard personal information',()=>{
   })
   test("check if info is updated",async()=>{
     const apiRequest = new ApiCalls();
-   const data = setUserBodyRequest("legend","ashraf","052-4563894",1,"1922-02-15")
-   await apiRequest.updateCustomeData(parseUserBodyToJSON(data))
+   const data = setUserBodyRequest("legend","maher","053-3376659",1,"1997-10-22")
+   await apiRequest.updateCustomeData(parseBodyToJSON(data))
    const infoPage =new InfoPage(page);
    expect(await infoPage.isFullNameMatches(data.first_name,data.last_name)).toBeTruthy();
   })
