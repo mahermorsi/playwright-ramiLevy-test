@@ -11,16 +11,15 @@ test.describe('test dashboard personal information',()=>{
   let browserWrapper:BrowserWrapper;
   let page:Page;
 
-  test.beforeEach(async()=>{
-    browserWrapper=new BrowserWrapper();
-    page = await browserWrapper.getPage(configJson.url+'dashboard')
+  test.beforeEach(async({page})=>{
+    await page.goto(configJson.url+'dashboard')
     const loginPage = new LoginPage(page);
     await loginPage.fullLoginProcess(configJson.user,configJson.password);
   });
-  test.afterEach(async()=>{
-    await browserWrapper.
-    closeBrowser();
-  })
+  test.afterEach(async({page})=>{
+    await page.close();
+  });
+    
   test("check if info is updated",async()=>{
     const apiRequest = new ApiCalls();
    const data = setUserBodyRequest("legend","maher","053-3376659",1,"1997-10-22")
