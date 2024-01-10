@@ -15,6 +15,10 @@ export class ApiCalls{
         return await patchRequest(configJson.configJson.deleteUrl,configJson.configJson.token)
     }
 
+    async addNewAddress(data: any){
+        return await postRequest(configJson.configJson.addressUrl ,data,configJson.configJson.token)
+    }
+
     
   
 }

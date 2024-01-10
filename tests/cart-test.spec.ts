@@ -20,10 +20,7 @@ test.describe('test for adding items in cart', () => {
     await loginPage.fullLoginProcess(configJson.user, configJson.password);
 
     const apiRequest = new ApiCalls();
-    const data = setCartBodyRequest("279", 0, {
-      "336789": "1.00",
-      "329483": "1.00",
-  })
+    const data = setCartBodyRequest("279", 0, {"336789": "1.00","329483": "1.00",})
     newPost = await apiRequest.addItemsToCart(parseCartBodyToJSON(data))
 
   });
