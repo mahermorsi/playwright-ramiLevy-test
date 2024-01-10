@@ -1,9 +1,9 @@
 import { test, Page, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
-import { LoginPage } from '../logic/login-page';
+import { LoginPage } from '../logic/pages/login-page';
 import {configJson} from '../config.json';
-import { AddressPage } from '../logic/address-page';
-import { MainPage } from '../logic/main-page';
+import { AddressPage } from '../logic/pages/address-page';
+import { MainPage } from '../logic/pages/main-page';
 
 test.describe('test for adding an address',()=>{
   let browserWrapper:BrowserWrapper;

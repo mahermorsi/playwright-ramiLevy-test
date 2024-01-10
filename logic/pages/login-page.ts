@@ -1,5 +1,5 @@
 import {type Locator, type Page } from '@playwright/test';
-import { BasePage } from '../infra/base-page';
+import { BasePage } from '../../infra/base-page';
 export class LoginPage extends BasePage{
     // LOCATORS
     private readonly loginMainButton:Locator

@@ -1,8 +1,8 @@
 import { test, Page, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
-import { LoginPage } from '../logic/login-page';
+import { LoginPage } from '../logic/pages/login-page';
 import {configJson} from '../config.json';
-import { InfoPage } from '../logic/personal-info-page';
+import { InfoPage } from '../logic/pages/personal-info-page';
 
 test.describe('test dashboard personal information',()=>{
   let browserWrapper:BrowserWrapper;

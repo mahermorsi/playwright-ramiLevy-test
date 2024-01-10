@@ -1,5 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
-import { BasePage } from '../infra/base-page';
+import { BasePage } from '../../infra/base-page';
+import { waitForElementToBeEnabled, waitForElementToBeVisible } from '../../utils/wait-for-elements';
+
 export class MainPage extends BasePage {
     // LOCATORS
     private readonly cartCount: Locator;
@@ -25,9 +27,11 @@ export class MainPage extends BasePage {
         await  this.addressManagementButton.click()
     }
     async getCartProductCount() {
+        const state = await waitForElementToBeVisible(this.cartCount.first(),1000,5)
         return await this.cartCount.count();
     }
     async getTotalPrice() {
+        const state = await waitForElementToBeVisible(this.cartCount.first(),1000,5)
         const sumShekels = await this.cartTotalPrice.textContent();
         if (sumShekels) {
             const cleanedString = sumShekels.replace(" ₪", "");
