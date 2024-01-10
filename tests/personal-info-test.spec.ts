@@ -1,6 +1,5 @@
 import { test, Page, expect } from '@playwright/test';
 import { BrowserWrapper } from '../infra/browser-wrapper';
-import { LoginPage } from '../logic/pages/login-page';
 import {configJson} from '../config.json';
 import { InfoPage} from '../logic/pages/personal-info-page';
 import { ApiCalls } from '../logic/api/api-calls';
@@ -14,8 +13,7 @@ test.describe('test dashboard personal information',()=>{
   test.beforeEach(async()=>{
     browserWrapper=new BrowserWrapper();
     page = await browserWrapper.getPage(configJson.url+'dashboard')
-    const loginPage = new LoginPage(page);
-    await loginPage.fullLoginProcess(configJson.user,configJson.password);
+ 
   });
   test.afterEach(async()=>{
     await browserWrapper.

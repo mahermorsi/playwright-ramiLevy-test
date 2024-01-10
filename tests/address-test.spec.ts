@@ -20,10 +20,10 @@ test.describe('test for adding an address',()=>{
     
   });
   test.afterEach(async()=>{
-    //await browserWrapper.closeBrowser();
+    await browserWrapper.closeBrowser();
     //await page.close();
   })
-  test("check address is successfully added",async({page})=>{
+  test("check address is successfully added",async()=>{
 
     const apiCalls = new ApiCalls();
     const dataObject = setAddressBodyRequest(1337,"עכברה","12","12","12","12")
