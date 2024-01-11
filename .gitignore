@@ -1,10 +1,12 @@
 node_modules/
+playwright/.auth/user
+allure-report
+allure-results
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 creataddressTest
-/config.json/
 /test-results/
 /playwright-report/
 /blob-report/
